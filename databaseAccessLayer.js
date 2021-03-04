@@ -1,8 +1,15 @@
 const database = include('/databaseConnection');
 
 
-function getAllTodos(callback) {
-	let sqlQuery = "SELECT * FROM todo";
+function getAllUsers(callback) {
+	let sqlQuery = `
+		SELECT 
+		web_user_id,
+		CONCAT(first_name, " ", last_name) AS 'name',
+		email
+		FROM web_users;
+	
+	`;
 	database.query(sqlQuery, (err, results, fields) => {
 		if (err) {
 			callback(err, null);
@@ -15,4 +22,4 @@ function getAllTodos(callback) {
 }
 
 
-module.exports = {getAllTodos}
+module.exports = {getAllUsers}
